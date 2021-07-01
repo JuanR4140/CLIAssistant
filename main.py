@@ -121,24 +121,23 @@ while True:
             os.system(f"start {yt}")
 
         if "play" in text:
-            text = text.split("play")[1]
-            say(f"Playing song: {text} on YouTube")
-            pywhatkit.playonyt(text)
-
-        if "lyrics" in text:
             url = "https://www.azlyrics.com/lyrics/beatles/"
-            text = text.split("lyrics")[1]
-            text = text.replace(" ", "")
-            say(f"Looking lyrics for: {text} on AZLyrics")
-            url += text + ".html"
+            text = text.split("play")[1]
+            say(f"Searching lyrics for: {text} on AZLyrics")
+            url += text.replace(" ", "") + ".html"
             req = requests.get(url)
-            if req.status_code == 404: say("Song does not have any lyrics on AZLyrics.")
-            else: say("Lyrics found")
-            soup = BeautifulSoup(req.content, "html.parser")
-            lyrics = soup.find_all("div")[20].get_text()
-            print(lyrics)
-            
-            input("> ")
+            if req.status_code == 404:
+                say(f"Song: {text} does not have any lyrics on AZLyrics.")
+                say(f"Playing song: {text} on YouTube")
+                pywhatkit.playonyt(text)
+            else:
+                say("Lyrics found.")
+                soup = BeautifulSoup(req.content, "html.parser")
+                lyrics = soup.find_all("div")[20].get_text()
+                print(lyrics)
+                say("Playing song on YouTube")
+                pywhatkit.playonyt(text)
+                input("> ")
 
         if "tell me a joke" in text:
             say("Sure, here's a joke for you.")
