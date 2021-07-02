@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 
 apps = {
     "clone hero": "C:\\Users\\juanr\\Desktop\\Clone Hero\\CLone Hero.exe",
+    "ftp server": "C:\\Users\\juanr\\Desktop\\FTP\\",
     "youtube": "https://www.youtube.com/"
 }
 
